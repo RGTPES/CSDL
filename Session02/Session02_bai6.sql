@@ -39,6 +39,14 @@
     
     
     );
+ INSERT INTO Teacher (Ma_giang_vien, Ho_ten, Email) 
+VALUES (3, 'Nguyen Van A', 'vna@gmail.com');
+    insert into Subject (Ma_mon_hoc, Ten_mon_hoc,So_tin_chi,Ma_giang_vien)
+    values( 1 , "TiengAnh" , 2 , 3),
+    ( 2 , "TiengViet" , 2 , 3),
+    ( 3 , "TiengDuc" , 2 , 3);
+       select 	*  from Subject;
+       
     
   
 

@@ -28,4 +28,5 @@ insert into order_items (order_id, product_id, quantity) values
 (1004, 6, 3),
 (1005, 1, 1),
 (1006, 4, 2);
+
 select name from products where id in (select distinct product_id from order_items );

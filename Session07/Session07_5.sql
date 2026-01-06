@@ -29,5 +29,5 @@ insert into orders (id, customer_id, order_date, total_amount) values
 (104, 3, '2026-01-04', 3000000.00),
 (105, 5, '2026-01-05', 1200000.00),
 (106, 2, '2026-01-06', 800000.00),
-(107, 6, '2026-01-07', 950000.00);
+(107, 6, '2026-01-07', 950000.00);	
 select c.id , c.name , c.email from customer c where ( select sum(o.total_amount) from orders o where o.customer_id = c.id ) = (select max(t.total_spent)from (select (select sum(o2.total_amount) from orders o2 where o2.customer_id =c2.id) as total_spent from customer c2 ) as t ); 

@@ -6,6 +6,7 @@ customer_id int ,
 full_name varchar(255),
 city varchar(255)
 );
+
 create table Orders(
 order_id int ,
 customer_id int ,

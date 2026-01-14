@@ -37,7 +37,7 @@ select 'User không tồn tại, không thể đăng bài' as message;
 
 end $$
 delimiter ;
-call sp_create_post(99 , "Hoc" ) ;
+call sp_create_post(1 , "Hoc" ) ;
 -- bai 5
 create or replace view vw_recent_posts as    
 select post_id ,  content from posts 
@@ -73,6 +73,7 @@ where exists (
 and p.created_at >= now() - interval 30 day
 )
 with check option;
+
 -- bai 9 
 delimiter $$
 
@@ -87,7 +88,7 @@ values (p_user_id, p_friend_id, 'pending');
 end if;
 end $$
 delimiter ;
-call sp_add_friend(1, 2);
+call sp_add_friend(2, 3);
 -- bai 10
 delimiter $$
 drop procedure if exists sp_suggest_friends $$
@@ -131,7 +132,6 @@ select count(*) into v_exists
 from likes
 where user_id = p_user_id and post_id = p_post_id;
 if v_exists > 0 then
-signal sqlstate '45000'
 set message_text = 'user đã thích post này rồi';
 else
 insert into likes(user_id, post_id) values (p_user_id, p_post_id);

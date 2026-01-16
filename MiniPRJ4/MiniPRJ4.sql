@@ -52,6 +52,7 @@ INSERT INTO Subjects (SubjectID, SubjectName, Credits) VALUES
 INSERT INTO Grades (StudentID, SubjectID, Score) VALUES 
 ('SV01', 'SB01', 8.5), -- Passed
 ('SV03', 'SB02', 3.0); -- Failed
+-- cau 1
 drop trigger if exists tg_CheckScore;
 delimiter $$
 create trigger tg_CheckScore
@@ -65,6 +66,7 @@ set new.Score = 10;
 end if;
 end $$
 delimiter ;
+-- cau 2
 start transaction;
 insert into Students (StudentID, FullName, TotalDebt)
 values ('SV02', 'Ha Bich Ngoc', 0);
@@ -74,6 +76,7 @@ where StudentID = 'SV02';
 commit;
 drop trigger if exists tg_LogGradeUpdate;
 delimiter $$
+-- cau 3
 create trigger tg_LogGradeUpdate
 after update on Grades
 for each row
@@ -84,6 +87,7 @@ values (old.StudentID, old.Score, new.Score, now());
 end if;
 end $$
 delimiter ;
+-- cau 4
 drop procedure if exists sp_PayTuition;
 delimiter $$
 create procedure sp_PayTuition()
@@ -104,6 +108,7 @@ commit;
 end if;
 end $$
 delimiter ;
+-- cau 5
 drop trigger if exists tg_PreventPassUpdate;
 delimiter $$
 create trigger tg_PreventPassUpdate
@@ -116,6 +121,7 @@ set message_text = 'khong duoc sua diem khi da qua mon';
 end if;
 end $$
 delimiter ;
+-- cau 6
 drop procedure if exists sp_Deletestudentgrade;
 delimiter $$
 create procedure sp_Deletestudentgrade(in p_studentid char(5), in p_subjectid char(5))
